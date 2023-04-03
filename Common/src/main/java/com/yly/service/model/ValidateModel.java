@@ -1,5 +1,6 @@
 package com.yly.service.model;
 
+import com.yly.service.TestService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -17,7 +18,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class ValidateModel implements Serializable {
 
-    @Min(0)
-    @Max(150)
+    @Min(value = 0, groups = TestService.Validate.class)
+    @Max(value = 150, groups = TestService.Validate.class)
     private int age;
 }

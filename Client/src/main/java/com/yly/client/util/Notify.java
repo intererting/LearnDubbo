@@ -9,5 +9,7 @@ package com.yly.client.util;
 public interface Notify {
     public void onreturn(String result, String value);
 
+    public void oninvoke(String value);
+
     public void onthrow(Throwable ex, String value);
 }

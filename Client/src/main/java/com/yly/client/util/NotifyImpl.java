@@ -20,6 +20,11 @@ public class NotifyImpl implements Notify {
     }
 
     @Override
+    public void oninvoke(String value) {
+        log.info(value + " " + "oninvoke");
+    }
+
+    @Override
     public void onthrow(Throwable ex, String value) {
         log.info(value + " onthrow:" + ex.getMessage());
     }

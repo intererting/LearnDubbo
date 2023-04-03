@@ -13,5 +13,7 @@ import java.util.List;
 public interface TestService {
     String test(String value);
 
+    @interface Validate {}
+
     String validate(ValidateModel model);
 }

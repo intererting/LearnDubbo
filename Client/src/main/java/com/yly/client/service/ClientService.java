@@ -25,16 +25,20 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class ClientService {
     /**
+     * group指定分组,在服务端找到该分组然后执行
      * retries在这里设置是可以的
      * timeout服务端优先级更高，方法级别最高
      * cache = "lru"
      */
     @DubboReference(interfaceClass = TestService.class, group = "initial", version = "2.0.0", methods = {
-            @Method(name = "test", retries = 3, timeout = 10000, onreturn = "notify.onreturn", onthrow = "notify.onthrow")
-    }, cluster = ClusterRules.FAIL_OVER, loadbalance = LoadbalanceRules.LEAST_ACTIVE, url = "dubbo://192.168.2.104:20881"
+            @Method(name = "test", retries = 3, timeout = 10000, onreturn = "notify.onreturn", oninvoke = "notify.oninvoke", onthrow = "notify.onthrow")
+    }, cluster = ClusterRules.FAIL_OVER, loadbalance = LoadbalanceRules.LEAST_ACTIVE, url = "dubbo://localhost:20881"
     )
     private TestService testService;
 
+    /**
+     * 将one,two两个分组的请求合并[from one, from two]
+     */
     @DubboReference(interfaceClass = MergerService.class, group = "one,two", merger = "true")
     private MergerService mergerService;
 
